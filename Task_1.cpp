@@ -8,21 +8,16 @@ private:
 public:
   static int index;
    MyVector(){}
+   ~MyVector(){}
    MyVector(int l):length(l){
      A=(double*)malloc (length*sizeof(double));
    }
    MyVector(MyVector &temp_vector)
    {
-  //   cout<<"v1 address: "<<&A<<"\nv2 address: "<<&temp_vector.A<<endl;
-    //double *temp=new double[temp_vector.length];
      length=temp_vector.length;
-    // temp=temp_vector.A;
      A=new double[temp_vector.length];
-     //*A=*temp_vector.A;
      for(int i=0;i<length;i++)
      A[i]=temp_vector.A[i];
-     //delete []temp;
-     cout<<"v1 address: "<<&A<<"\nv2 address: "<<*temp_vector.A<<endl;
    }
    void add(double item)
    {
