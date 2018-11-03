@@ -19,6 +19,26 @@ public:
      for(int i=0;i<length;i++)
      A[i]=temp_vector.A[i];
    }
+   bool redim(int l)
+   {
+     double* check=NULL;
+     length=l;
+     check=(double*) realloc(A,length*sizeof(double));
+     A=check;
+     if(check==NULL)
+     return false;
+     else
+     return true;
+   }
+   MyVector operator =(MyVector v)
+   {
+     MyVector temp_V;
+     temp_V.length=v.length;
+     temp_V.A=new double[v.length];
+     for(int i=0;i<temp_V.length;i++)
+     temp_V.A[i]=v.A[i];
+     return temp_V;
+   }
    void add(double item)
    {
      A[index++]=item;
@@ -38,19 +58,16 @@ public:
 };
 int MyVector::index=0;
 int main(int argc, char const *argv[]) {
-  MyVector v1(5);
+  MyVector v1(3),v2;
   v1.add(1);
   v1.add(2);
   v1.add(3);
-  v1.add(4);
-  v1.add(5);
-  MyVector v2(v1);
+  v2=v1;
   v1.show_V();
   v2.show_V();
   v1.del();
   v1.show_V();
   v2.show_V();
-
 
   return 0;
 }
