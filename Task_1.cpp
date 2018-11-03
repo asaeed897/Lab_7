@@ -30,21 +30,24 @@ public:
      else
      return true;
    }
-   MyVector operator =(MyVector v)
+   void operator = (MyVector &v)
    {
-     MyVector temp_V;
-     temp_V.length=v.length;
-     temp_V.A=new double[v.length];
-     for(int i=0;i<temp_V.length;i++)
-     temp_V.A[i]=v.A[i];
-     return temp_V;
+     length=v.length;
+     A=new double[length];
+     for(int i=0;i<length;i++)
+     A[i]=v.A[i];
    }
+   double operator [] (int i)
+   {
+     return A[i];
+   }
+
    void add(double item)
    {
      A[index++]=item;
    }
    void del()
-   {
+  {
      A[--index]=0;
    }
    void show_V()
@@ -62,12 +65,13 @@ int main(int argc, char const *argv[]) {
   v1.add(1);
   v1.add(2);
   v1.add(3);
-  v2=v1;
+  /*v2=v1;
   v1.show_V();
   v2.show_V();
   v1.del();
   v1.show_V();
   v2.show_V();
-
+*/
+cout<<"Element:"<<v1[0];
   return 0;
 }
