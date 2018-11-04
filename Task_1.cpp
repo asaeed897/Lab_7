@@ -7,6 +7,7 @@ private:
   int length;
 public:
   static int index;
+  friend ostream& operator <<(ostream& out,MyVector v);
    MyVector(){}
    ~MyVector(){}
    MyVector(int l):length(l){
@@ -37,11 +38,37 @@ public:
      for(int i=0;i<length;i++)
      A[i]=v.A[i];
    }
-   double operator [] (int i)
+   double operator -(MyVector v)
    {
-     return A[i];
+     double product=0;
+     if(length==v.length)
+     {
+       for(int i=0;i<length;i++)
+       product+=A[i]*v.A[i];
+       return product;
+     }
+     else
+     cout<<"Error"<<endl;
+   }
+   void operator *(int k)
+   {
+    for(int i=0;i<length;i++)
+    A[i]=k*A[i];
+   }
+   MyVector operator +(MyVector v)
+   {
+     MyVector temp_v;
+     temp_v.length=length;
+     temp_v.A=new double[length];
+    for(int i=0;i<length;i++)
+    temp_v.A[i]=A[i]+v.A[i];
+    return temp_v;
    }
 
+   int size_v()
+   {
+     return length;
+   }
    void add(double item)
    {
      A[index++]=item;
@@ -59,19 +86,30 @@ public:
    }
 
 };
+ostream& operator <<(ostream& out,MyVector v)
+{
+  out<<"vector: ";
+  for(int i=0;i<v.length;i++)
+  out<<v.A[i]<<" ";
+  out<<endl;
+  return out;
+}
 int MyVector::index=0;
 int main(int argc, char const *argv[]) {
-  MyVector v1(3),v2;
+  MyVector v1(3),v2,v3;
   v1.add(1);
   v1.add(2);
   v1.add(3);
-  /*v2=v1;
-  v1.show_V();
+  v2=v1;
+  /*v1.show_V();
   v2.show_V();
   v1.del();
   v1.show_V();
   v2.show_V();
 */
-cout<<"Element:"<<v1[0];
+v3(v1+v2);
+//cout<<"Element:"<<v1[0]<<"Size "<<v1.size_v();
+//(v1*4);
+cout<<"const multiply: "<<v3;
   return 0;
 }
