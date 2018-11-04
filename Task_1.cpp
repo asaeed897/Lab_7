@@ -55,14 +55,15 @@ public:
     for(int i=0;i<length;i++)
     A[i]=k*A[i];
    }
-   MyVector operator +(MyVector v)
+   void operator +(MyVector v)
    {
-     MyVector temp_v;
+     /*MyVector temp_v;
      temp_v.length=length;
      temp_v.A=new double[length];
+    */
     for(int i=0;i<length;i++)
-    temp_v.A[i]=A[i]+v.A[i];
-    return temp_v;
+    A[i]=A[i]+v.A[i];
+    //return temp_v;
    }
 
    int size_v()
@@ -107,9 +108,9 @@ int main(int argc, char const *argv[]) {
   v1.show_V();
   v2.show_V();
 */
-v3(v1+v2);
+v1+v2;
 //cout<<"Element:"<<v1[0]<<"Size "<<v1.size_v();
 //(v1*4);
-cout<<"const multiply: "<<v3;
+cout<<"const multiply: "<<v1;
   return 0;
 }
